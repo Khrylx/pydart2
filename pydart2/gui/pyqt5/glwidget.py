@@ -100,10 +100,10 @@ class GLWidget(QtWidgets.QOpenGLWidget):
 
     def capture(self, name=None):
         data = GL.glReadPixels(0, 0,
-                               self.width, self.height,
+                               self.width * 2, self.height * 2,
                                GL.GL_RGBA,
                                GL.GL_UNSIGNED_BYTE)
-        img = QtGui.QImage(data, self.width, self.height,
+        img = QtGui.QImage(data, self.width * 2, self.height * 2,
                            QtGui.QImage.Format_RGBA8888_Premultiplied)
         T = QtGui.QTransform()
         T.scale(1.0, -1.0)
