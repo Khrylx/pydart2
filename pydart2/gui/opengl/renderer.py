@@ -10,7 +10,6 @@ from past.utils import old_div
 
 import OpenGL.GL as GL
 import OpenGL.GLU as GLU
-import OpenGL.GLUT as GLUT
 import math
 import numpy as np
 
@@ -200,12 +199,12 @@ class Renderer(object):
         GL.glEnd()
         self.pop()
 
-    def draw_text(self, pos, text, font=GLUT.GLUT_BITMAP_HELVETICA_18):
-        self.push()
-        GL.glRasterPos(*pos)
-        for c in text:
-            GLUT.glutBitmapCharacter(font, ord(c))
-        self.pop()
+    # def draw_text(self, pos, text, font=GLUT.GLUT_BITMAP_HELVETICA_18):
+    #     self.push()
+    #     GL.glRasterPos(*pos)
+    #     for c in text:
+    #         GLUT.glutBitmapCharacter(font, ord(c))
+    #     self.pop()
 
     def gen_textures(self, num_textures=1):
         im = GL.glGenTextures(num_textures)
@@ -272,14 +271,55 @@ class Renderer(object):
     def render_sphere(self, pos, r, num_seg1=20, num_seg2=10):
         GL.glPushMatrix()
         GL.glTranslated(*pos)
-        GLUT.glutSolidSphere(r, num_seg1, num_seg2)
+        # GLUT.glutSolidSphere(r, num_seg1, num_seg2)
+        GLU.gluSphere(self.quadric, r, num_seg1, num_seg2)
         GL.glPopMatrix()
 
     def render_box(self, pos, size):
         GL.glPushMatrix()
         GL.glTranslated(*pos)
         GL.glScaled(*size)
-        GLUT.glutSolidCube(1.0)
+        #GLUT.glutSolidCube(1.0)
+
+        GL.glBegin(GL.GL_QUADS)
+
+        GL.glNormal3f(0.0, 1.0, 0.0)
+        GL.glVertex3f(1.0, 1.0, -1.0)
+        GL.glVertex3f(-1.0, 1.0, -1.0)
+        GL.glVertex3f(-1.0, 1.0, 1.0)
+        GL.glVertex3f(1.0, 1.0, 1.0)
+
+        GL.glNormal3f(0.0, -1.0, 0.0)
+        GL.glVertex3f(1.0, -1.0, 1.0)
+        GL.glVertex3f(-1.0, -1.0, 1.0)
+        GL.glVertex3f(-1.0, -1.0, -1.0)
+        GL.glVertex3f(1.0, -1.0, -1.0)
+
+        GL.glNormal3f(0.0, 0.0, 1.0)
+        GL.glVertex3f(1.0, 1.0, 1.0)
+        GL.glVertex3f(-1.0, 1.0, 1.0)
+        GL.glVertex3f(-1.0, -1.0, 1.0)
+        GL.glVertex3f(1.0, -1.0, 1.0)
+
+        GL.glNormal3f(0.0, 0.0, -1.0)
+        GL.glVertex3f(1.0, -1.0, -1.0)
+        GL.glVertex3f(-1.0, -1.0, -1.0)
+        GL.glVertex3f(-1.0, 1.0, -1.0)
+        GL.glVertex3f(1.0, 1.0, -1.0)
+
+        GL.glNormal3f(-1.0, 0.0, 0.0)
+        GL.glVertex3f(-1.0, 1.0, 1.0)
+        GL.glVertex3f(-1.0, 1.0, -1.0)
+        GL.glVertex3f(-1.0, -1.0, -1.0)
+        GL.glVertex3f(-1.0, -1.0, 1.0)
+
+        GL.glNormal3f(1.0, 0.0, 1.0)
+        GL.glVertex3f(1.0, 1.0, -1.0)
+        GL.glVertex3f(1.0, 1.0, 1.0)
+        GL.glVertex3f(1.0, -1.0, 1.0)
+        GL.glVertex3f(1.0, -1.0, -1.0)
+
+        GL.glEnd();
         GL.glPopMatrix()
 
     def render_chessboard(self, sz, n=10, color1=None, color2=None):
@@ -382,7 +422,8 @@ class Renderer(object):
             # glColor(1.0, 0.0, 0.0)
             GL.glPushMatrix()
             GL.glMultMatrixd(m)
-            GLUT.glutSolidCone(head_width, head_len, 10, 3)
+            #GLUT.glutSolidCone(head_width, head_len, 10, 3)
+            GLU.gluCylinder(self.quadric, head_width, 0, head_len, 10, 3)
             GL.glPopMatrix()
             # gluDeleteQuadric(m_quadric)
             # glEnable(GL_LIGHTING)

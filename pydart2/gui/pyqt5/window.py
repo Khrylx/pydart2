@@ -19,7 +19,6 @@ import signal
 
 import logging
 
-import OpenGL.GLUT
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
@@ -39,8 +38,7 @@ class PyQt5Window(QtWidgets.QMainWindow):
     GLUT_INITED = False
 
     def __init__(self, sim=None, title=None):
-        if not PyQt5Window.GLUT_INITED:
-            OpenGL.GLUT.glutInit(sys.argv)
+
 
         if title is None:
             title = "Simulation Viewer"

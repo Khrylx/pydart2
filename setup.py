@@ -17,6 +17,8 @@ def check_file(directories, file):
             return True
     return False
 
+#os.environ["CC"] = "gcc-7"
+#os.environ["CXX"] = "gcc-7"
 
 DIR = 'pydart2/'
 dirs = ['/usr/include', '/usr/local/include']
@@ -95,7 +97,7 @@ if _platform == "linux" or _platform == "linux2":
     libraries += ['GL', 'glut', 'Xmu', 'Xi']
     CXX_FLAGS += '-fno-inline-functions-called-once'
 elif _platform == "darwin":
-    CXX_FLAGS += '-framework Cocoa '
+    CXX_FLAGS += ' -mmacosx-version-min=10.9 -framework Cocoa '
     CXX_FLAGS += '-framework OpenGL '
     CXX_FLAGS += '-framework GLUT '
 
