@@ -148,7 +148,7 @@ class PyQt5Window(QtWidgets.QMainWindow):
                          720 + TOOLBOX_HEIGHT + STATUS_HEIGHT)
         self.ui.setGeometry(0, TOOLBOX_HEIGHT, 1280 + PANEL_WIDTH, 720)
         self.glwidget.setGeometry(0, 0, 1280, 720)
-        self.glwidget.resizeGL(1280, 720)
+        # self.glwidget.resizeGL(1280, 720)
 
         self.right_panel = panel
         layout = panel.build_layout()

@@ -122,7 +122,7 @@ class OpenGLScene(object):
         self.enable2D()
         if hasattr(sim, "draw_with_ri"):
             sim.draw_with_ri(self.renderer)
-            self.renderer.draw_text([-100, -100], "")
+            # self.renderer.draw_text([-100, -100], "")
         self.disable2D()
 
     def enable2D(self):
