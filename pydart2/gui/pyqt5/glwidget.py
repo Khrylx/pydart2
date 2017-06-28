@@ -66,6 +66,7 @@ class GLWidget(QtWidgets.QOpenGLWidget):
 
         pos = np.array([event.pos().x(), event.pos().y()],
                        dtype=np.float64)
+        self.setFocus()
         self.viewer.safe_call_callback("on_mouse_press", pos)
 
     def mouseReleaseEvent(self, event):
